@@ -3,6 +3,7 @@
 
 #include "BasePawn.h"
 #include "Components/CapsuleComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 ABasePawn::ABasePawn()
@@ -23,13 +24,6 @@ ABasePawn::ABasePawn()
 	ProjSpawnPoint->SetupAttachment(TurretMesh);
 }
 
-// Called when the game starts or when spawned
-void ABasePawn::BeginPlay()
-{
-	Super::BeginPlay();
-	
-}
-
 // Called every frame
 void ABasePawn::Tick(float DeltaTime)
 {
@@ -37,10 +31,10 @@ void ABasePawn::Tick(float DeltaTime)
 
 }
 
-// Called to bind functionality to input
-void ABasePawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
+void ABasePawn::Rotate(FVector LookAtTarget) {
+    FVector TurretLocation = TurretMesh->GetComponentLocation();
+    FVector ToTarget = LookAtTarget - TurretLocation;
+    FRotator ToTargetRot = FRotator(0, ToTarget.Rotation().Yaw, 0);
+    TurretMesh->SetWorldRotation(FMath::RInterpTo(TurretMesh->GetComponentRotation(),
+	 ToTargetRot, UGameplayStatics::GetWorldDeltaSeconds(this), 10));
 }
-
