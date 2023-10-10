@@ -8,15 +8,27 @@
 void ATower::BeginPlay() {
     Super::BeginPlay();
     Tank = (ATank*)UGameplayStatics::GetPlayerPawn(this, 0);
+    GetWorldTimerManager().SetTimer(FireRateTimerHandle, this, &ATower::CheckFireCondition, FireRate, true);
 }
 
 void ATower::Tick(float DeltaTime) {
     Super::Tick(DeltaTime);
     if (Tank) {
-        float TankDist = FVector::Dist(GetActorLocation(), Tank->GetActorLocation());
+        TankDist = FVector::Dist(GetActorLocation(), Tank->GetActorLocation());
         if (TankDist <= FireDist) {
             Super::Rotate(Tank->GetActorLocation());
         }
     }
 
+}
+
+void ATower::CheckFireCondition() {
+    if (TankDist <= FireDist) {
+        ATower::Fire();
+    }
+}
+
+void ATower::HandleDestruction() {
+    Super::HandleDestruction();
+    Destroy();
 }

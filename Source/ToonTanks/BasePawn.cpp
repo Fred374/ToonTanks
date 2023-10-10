@@ -2,6 +2,7 @@
 
 
 #include "BasePawn.h"
+#include "Projectile.h"
 #include "Components/CapsuleComponent.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -37,4 +38,14 @@ void ABasePawn::Rotate(FVector LookAtTarget) {
     FRotator ToTargetRot = FRotator(0, ToTarget.Rotation().Yaw, 0);
     TurretMesh->SetWorldRotation(FMath::RInterpTo(TurretMesh->GetComponentRotation(),
 	 ToTargetRot, UGameplayStatics::GetWorldDeltaSeconds(this), 10));
+}
+
+void ABasePawn::Fire() {
+	auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileClass,
+	 ProjSpawnPoint->GetComponentLocation(), ProjSpawnPoint->GetComponentRotation());
+	Projectile->SetOwner(this);
+}
+
+void ABasePawn::HandleDestruction() {
+	
 }

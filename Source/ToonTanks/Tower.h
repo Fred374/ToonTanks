@@ -18,6 +18,8 @@ class TOONTANKS_API ATower : public ABasePawn
 
 		virtual void Tick(float DeltaTime) override;
 
+		void HandleDestruction();
+
 	protected:
 
 		virtual void BeginPlay() override;
@@ -28,4 +30,10 @@ class TOONTANKS_API ATower : public ABasePawn
 
 		UPROPERTY(EditAnywhere)
 		float FireDist = 1000;
+
+		float TankDist;
+
+		FTimerHandle FireRateTimerHandle;
+		float FireRate = 2.f;
+		void CheckFireCondition();
 };

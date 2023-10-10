@@ -27,10 +27,17 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "BasePawn")
 	USceneComponent *ProjSpawnPoint;
 
+	UPROPERTY(EditDefaultsOnly, Category = "BasePawn")
+	TSubclassOf<class AProjectile> ProjectileClass;
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	void HandleDestruction();
+
 protected:
 	void Rotate(FVector LookAtTarget);
+
+	void Fire();
 
 };

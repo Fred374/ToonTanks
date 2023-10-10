@@ -20,6 +20,10 @@ class TOONTANKS_API ATank : public ABasePawn
 
 		virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+		void HandleDestruction();
+
+		APlayerController *GetTankPlayerController() const {return TankPlayerController;}
+
 	protected:
 		// Called when the game starts or when spawned
 		virtual void BeginPlay() override;
@@ -32,7 +36,7 @@ class TOONTANKS_API ATank : public ABasePawn
 		UPROPERTY(VisibleAnywhere, Category = "Tank")
 		class USpringArmComponent *SpringArmComp;
 
-		APlayerController *PlayerControllerRef;
+		APlayerController *TankPlayerController;
 
 		UPROPERTY(EditAnywhere, Category = "Tank")
 		float Speed = 300.0f;
@@ -45,6 +49,4 @@ class TOONTANKS_API ATank : public ABasePawn
 		void Rotate(float Value);
 
 		void Turn(float Value);
-
-		void Fire();
 };
