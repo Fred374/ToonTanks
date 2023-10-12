@@ -44,7 +44,7 @@ void AProjectile::OnHit(UPrimitiveComponent *HitComp, AActor *OtherActor, UPrimi
 		auto DamageTypeClass = UDamageType::StaticClass();
 		if (OtherActor && OtherActor != this && OtherActor != MyOwner) {
 			UGameplayStatics::ApplyDamage(OtherActor, Damage, MyInstigator, this, DamageTypeClass);
-			Destroy();
 		}
 	}
+	Destroy();
 }
