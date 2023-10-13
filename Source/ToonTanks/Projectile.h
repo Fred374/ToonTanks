@@ -25,15 +25,21 @@ public:
 
 private:
 
-	UPROPERTY(VisibleAnywhere, Category = "Projectile")
+	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent *BaseMesh;
 
-	UPROPERTY(VisibleAnywhere, Category = "Projectile")
+	UPROPERTY(VisibleAnywhere)
 	class UProjectileMovementComponent *MoveComp;
+
+	UPROPERTY(VisibleAnywhere)
+	class UParticleSystemComponent *ParticleComp;
 
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent *HitComp, AActor *OtherActor, UPrimitiveComponent *OtherComp, FVector NormalImpulse, const FHitResult &Hit);
 
 	float Damage = 50.f;
+
+	UPROPERTY(EditAnywhere, Category = "Projectile")
+	class UParticleSystem *HitParticles;
 
 };
