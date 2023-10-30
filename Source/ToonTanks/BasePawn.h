@@ -30,6 +30,15 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "BasePawn")
 	TSubclassOf<class AProjectile> ProjectileClass;
 
+	UPROPERTY(EditAnywhere, Category = "BasePawn")
+	class UParticleSystem *DeathParticles;
+
+	UPROPERTY(EditAnywhere, Category = "BasePawn")
+	class USoundBase *DeathSound;
+
+	UPROPERTY(EditAnywhere, Category = "BasePawn")
+	TSubclassOf<class UCameraShakeBase> DeathShakeClass;
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 

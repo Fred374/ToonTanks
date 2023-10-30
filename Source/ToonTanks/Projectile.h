@@ -42,4 +42,13 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Projectile")
 	class UParticleSystem *HitParticles;
 
+	UPROPERTY(EditAnywhere, Category = "Projectile")
+	class USoundBase *LaunchSound;
+
+	UPROPERTY(EditAnywhere, Category = "Projectile")
+	USoundBase *HitSound;
+
+	UPROPERTY(EditAnywhere, Category = "Projectile")
+	TSubclassOf<class UCameraShakeBase> HitShakeClass;
+
 };

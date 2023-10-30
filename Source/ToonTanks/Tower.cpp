@@ -23,7 +23,7 @@ void ATower::Tick(float DeltaTime) {
 }
 
 void ATower::CheckFireCondition() {
-    if (TankDist <= FireDist) {
+    if (TankDist <= FireDist && Tank->IsActorTickEnabled()) {
         ATower::Fire();
     }
 }
